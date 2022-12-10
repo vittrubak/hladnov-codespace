@@ -1,18 +1,39 @@
-const secondHand = document.querySelector('.second-hand');
-  const minsHand = document.querySelector('.min-hand');
-  const hourHand = document.querySelector('.hour-hand');
-  function setDate() {
-    const now = new Date();
-    const seconds = now.getSeconds();
-    const secondsDegrees = ((seconds / 60) * 360) + 90;
-    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-    const mins = now.getMinutes();
-    const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-    minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-    const hour = now.getHours();
-    // change seconds to hours on the line below
-    const hourDegrees = ((seconds / 12) * 360) + ((mins/60)*30) + 90;
-    hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+const had = [document.querySelector('.had')]
+
+function pohniHadem(dolu, doprava) {
+  
+  console.log("Had je na " + had.id)
+
+  let x = parseInt(had[0].id.split(":")[0])
+  let y = parseInt(had[0].id.split(":")[1])
+  const idCil = (x + dolu) + ":" + (y + doprava)
+  console.log("Had bude na " + idCil)
+
+  const cil = document.getElementById(idCil)
+  cil.classList.add("had")
+  had.unshift(cil)
+  
+  const posledni = had.pop()
+  posledni.classList.remove("had")
+}
+
+function pohyb(udalost) {
+  if (udalost.which === 37) {
+    console.log('Hade, jdi doleva pls')
+    pohniHadem(0, -1)
   }
-  setInterval(setDate, 1000);
-  setDate();
+  if (udalost.which === 38) {
+    console.log('Hade, jdi nahoru pls')
+    pohniHadem(-1, 0)
+  }
+  if (udalost.which === 39) {
+    console.log('Hade, jdi doprava pls')
+    pohniHadem(0, 1)
+  }
+  if (udalost.which === 40) {
+    console.log('Hade, jdi dolů pls')
+    pohniHadem(1, 0)
+  }
+}
+
+document.addEventListener('keydown', pohyb)
