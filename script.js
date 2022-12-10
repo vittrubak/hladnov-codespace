@@ -1,19 +1,15 @@
-const had = [document.querySelector(".had")];
-
 function pohniHadem(dolu, doprava) {
+  const had = document.querySelector(".had");
   console.log("Had je na " + had.id);
 
-  let x = parseInt(had[0].id.split(":")[0]);
-  let y = parseInt(had[0].id.split(":")[1]);
+  let x = parseInt(had.id.split(":")[0]);
+  let y = parseInt(had.id.split(":")[1]);
   const idCil = x + dolu + ":" + (y + doprava);
   console.log("Had bude na " + idCil);
 
   const cil = document.getElementById(idCil);
   cil.classList.add("had");
-  had.unshift(cil);
-
-  const posledni = had.pop();
-  posledni.classList.remove("had");
+  had.classList.remove("had");
 }
 
 function pohyb(udalost) {
