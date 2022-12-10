@@ -2,6 +2,6 @@
   "recommendations": [
     "ms-vsliveshare.vsliveshare",
     "blackgirlbytes.deploy-to-github-pages",
-    "codespaces-contrib.codeswing"
+    "ritwickdey.LiveServer"
   ]
 }
