@@ -2,9 +2,9 @@ function pohniHadem(dolu, doprava) {
   const had = document.querySelector(".had");
   console.log("Had je na " + had.id);
 
-  let x = parseInt(had.id.split(":")[0]);
-  let y = parseInt(had.id.split(":")[1]);
-  const idCil = x + dolu + ":" + (y + doprava);
+  let radek = parseInt(had.id.split(":")[0]);
+  let sloupec = parseInt(had.id.split(":")[1]);
+  const idCil = radek + dolu + ":" + (sloupec + doprava);
   console.log("Had bude na " + idCil);
 
   const cil = document.getElementById(idCil);
