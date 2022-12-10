@@ -1,10 +1,7 @@
 {
-	"extensions": [
-		"esbenp.prettier-vscode",
-		"ms-vsliveshare.vsliveshare",
-		"blackgirlbytes.deploy-to-github-pages",
-		"tinkertrain.theme-panda",
-		"codespaces-contrib.codeswing"
-	]
-
+  "extensions": [
+    "ms-vsliveshare.vsliveshare",
+    "blackgirlbytes.deploy-to-github-pages",
+    "codespaces-contrib.codeswing"
+  ]
 }
