@@ -8,3 +8,7 @@
 .had {
   background: lime;
 }
+
+body {
+  overflow: hidden;
+}
