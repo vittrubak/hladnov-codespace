@@ -5,6 +5,9 @@
   display: inline-block;
 }
 
+.zradlo {
+  background: red
+}
 .had {
   background: lime;
 }
