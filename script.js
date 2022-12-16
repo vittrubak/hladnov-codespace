@@ -1,6 +1,5 @@
 let had = [document.querySelector(".had")]
 
-
 function pohniHadem(dolu, doprava) {
   const hadHlava = had[0]
   console.log("Had je na " + hadHlava.id);
