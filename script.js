@@ -1,11 +1,19 @@
 let had = [document.querySelector(".had")]
 let tlacitko = document.querySelector(".tlacitko")
+let tlacitkoGen = document.getElementById("generovat")
+let poleX = document.getElementById("poleX")
+let poleY = document.getElementById("poleY")
 let zacateki = null
 let x = 0
 let y = 1
 document.addEventListener("keydown", pohyb);
 tlacitko.addEventListener("click", zacatek);
+tlacitkoGen.addEventListener("click", mapaGen);
+ 
+function mapaGen(){
 
+
+}
 
 function zacatek() {
   tlacitko.remove()
@@ -13,7 +21,7 @@ function zacatek() {
 }
 
 function hybani() {
-  if (x == 0 & y == 0)
+  if (x == 0 && y == 0)
     console.log("nebudu se hybat")
   else
     pohniHadem(x, y)
@@ -38,6 +46,10 @@ function randomzradlo(){
   const idZradlo = zradloradek + ":" + zradlosloupec;
   console.log(idZradlo);
   const zradlonekde = document.getElementById(idZradlo)
+  if (zradlonekde.classList.contains("had") || zradlonekde.classList.contains("zradlo")) {
+    randomzradlo();
+    return;
+  }
   zradlonekde.classList.add("zradlo")
 }
 
@@ -51,7 +63,7 @@ function pohniHadem(dolu, doprava) {
   const idCil = radek + dolu + ":" + (sloupec + doprava);
   console.log("Had bude na " + idCil);
 
-  let cil = document.getElementById(idCil);
+  const cil = document.getElementById(idCil);
 
   if (cil == null || cil.classList.contains("had")) {
     konec(cil);
@@ -64,18 +76,18 @@ function pohniHadem(dolu, doprava) {
   if (cil.classList.contains("zradlo")) {
     console.log("had bude zrat")
     cil.classList.remove("zradlo")
+    cil.classList.add("had");
     randomzradlo();
   }
   
   else {
     const polektereprestavabythadem = had.pop();
     polektereprestavabythadem.classList.remove("had");
+    cil.classList.add("had");
   }
 
-  cil.classList.add("had");
 
 }
-
 
 function pohyb(udalost) {
   if (udalost.which === 37) {
@@ -98,4 +110,17 @@ function pohyb(udalost) {
     x = 1
     y = 0
   }
+}
+
+function precti() {
+  const hodnota1 = parseInt(policko1.value)
+	const hodnota2 = parseInt(policko2.value)
+  
+	if (isNaN(hodnota1) || isNaN(hodnota2)) {
+		window.alert("počitam jenom s čísly")
+
+    throw "Chyba: narazil jsem na NaN!"
+  }
+  
+  return [hodnota1, hodnota2]
 }
