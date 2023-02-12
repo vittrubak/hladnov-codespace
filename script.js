@@ -11,6 +11,7 @@ tlacitko.addEventListener("click", zacatek);
 tlacitkoGen.addEventListener("click", mapaGen);
  
 function mapaGen(){
+precti();
 
 
 }
