@@ -11,7 +11,9 @@ tlacitko.addEventListener("click", zacatek);
 tlacitkoGen.addEventListener("click", mapaGen);
  
 function mapaGen(){
-precti();
+const [hodnotaRad, hodnotaSlo] = precti();
+
+
 
 
 }
@@ -114,14 +116,14 @@ function pohyb(udalost) {
 }
 
 function precti() {
-  const hodnota1 = parseInt(policko1.value)
-	const hodnota2 = parseInt(policko2.value)
+  const hodnotaRad = parseInt(poleX.value)
+	const hodnotaSlo = parseInt(poleY.value)
   
-	if (isNaN(hodnota1) || isNaN(hodnota2)) {
-		window.alert("počitam jenom s čísly")
+	if (isNaN(hodnotaRad) || isNaN(hodnotaSlo)) {
+		alert("počitam jenom s čísly")
 
     throw "Chyba: narazil jsem na NaN!"
   }
   
-  return [hodnota1, hodnota2]
+  return [hodnotaRad, hodnotaSlo];
 }
