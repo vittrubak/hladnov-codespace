@@ -1,23 +1,73 @@
-let had = [document.querySelector(".had")]
+let had;
 let tlacitko = document.querySelector(".tlacitko")
 let tlacitkoGen = document.getElementById("generovat")
-let poleX = document.getElementById("poleX")
-let poleY = document.getElementById("poleY")
 let zacateki = null
 let x = 0
 let y = 1
+let mrizka = document.getElementById("plocha");
 document.addEventListener("keydown", pohyb);
 tlacitko.addEventListener("click", zacatek);
 tlacitkoGen.addEventListener("click", mapaGen);
- 
-function mapaGen(){
-const [hodnotaRad, hodnotaSlo] = precti();
+let poleVelikostX;
+let poleVelikostY;
+let velikostX;
+let velikostY;
+let pocetpolicek;
+let score = 0
+let kolikjidla;
 
 
+function mapaGen() {
 
+  for (const element of mrizka.querySelectorAll("br, .pole")) {
+    element.remove()
+  }
 
+  poleVelikostX = document.getElementById("velikostX");
+  poleVelikostY = document.getElementById("velikostY");
+  velikostX = parseInt(poleVelikostX.value);
+  velikostY = parseInt(poleVelikostY.value);
+
+  console.log("Měním mřížku na velikost " + velikostX + ":" + velikostY)
+  for (let noveX = 1; noveX <= velikostX; noveX++) {
+    for (let noveY = 1; noveY <= velikostY; noveY++) {
+      const novyDiv = document.createElement("div");
+      novyDiv.classList.add("pole");
+      novyDiv.id = noveX + ":" + noveY
+      mrizka.append(novyDiv);
+      console.log("Přidám div s id" + novyDiv.id)
+      mrizka.append(" ");
+    }
+    const noveBr = document.createElement("br");
+    mrizka.append(noveBr);
+  }
+  console.log("uvnitr" + velikostX)
+  return spawnHad(), spawnJidlo(), spocitatPole();
 }
 
+function spocitatPole() {
+ pocetpolicek = velikostX * velikostY
+ console.log(pocetpolicek)
+ 
+}
+
+function spawnHad() {
+  const spawnHadX = Math.floor(velikostX / 2) 
+  const spawnHadY = Math.floor(velikostY / 2)
+  const idSpawn = spawnHadX + ":" + spawnHadY
+  console.log(idSpawn);
+  const spawnkde = document.getElementById(idSpawn)
+  spawnkde.classList.add("had");
+  had = had = [document.querySelector(".had")]
+}
+
+function spawnJidlo() {
+  kolikjidla = Math.floor(velikostX / 2)
+  for (i = 1; i <= kolikjidla; i++) {
+    randomzradlo();
+  }
+
+}
 function zacatek() {
   tlacitko.remove()
   zacateki = setInterval(hybani, 600);
@@ -28,6 +78,17 @@ function hybani() {
     console.log("nebudu se hybat")
   else
     pohniHadem(x, y)
+}
+
+function vyhra(score) {
+if (score === pocetpolicek - kolikjidla) {
+  clearInterval(zacateki)
+  alert("ZVÍTĚZIL JSI!!!")
+  location.reload()
+}
+else {
+  return;
+}
 }
 
 function konec(cil){
@@ -43,9 +104,9 @@ function konec(cil){
   }
 }
 
-function randomzradlo(){
-  const zradloradek = Math.floor(Math.random() * 7 + 1);
-  const zradlosloupec = Math.floor(Math.random() * 7 + 1);
+function randomzradlo() {
+  const zradloradek = Math.floor(Math.random() * velikostX + 1);
+  const zradlosloupec = Math.floor(Math.random() * velikostY + 1);
   const idZradlo = zradloradek + ":" + zradlosloupec;
   console.log(idZradlo);
   const zradlonekde = document.getElementById(idZradlo)
@@ -71,7 +132,7 @@ function pohniHadem(dolu, doprava) {
   if (cil == null || cil.classList.contains("had")) {
     konec(cil);
     return;
-   }
+  }
 
   had.unshift(cil); // vloží do pole "cíl" na začátek
 
@@ -80,15 +141,16 @@ function pohniHadem(dolu, doprava) {
     console.log("had bude zrat")
     cil.classList.remove("zradlo")
     cil.classList.add("had");
-    randomzradlo();
+    score += 1 
+    document.getElementById("scoreH").innerHTML = score
+    vyhra(score), randomzradlo();
   }
-  
+
   else {
     const polektereprestavabythadem = had.pop();
     polektereprestavabythadem.classList.remove("had");
     cil.classList.add("had");
   }
-
 
 }
 
@@ -113,17 +175,4 @@ function pohyb(udalost) {
     x = 1
     y = 0
   }
-}
-
-function precti() {
-  const hodnotaRad = parseInt(poleX.value)
-	const hodnotaSlo = parseInt(poleY.value)
-  
-	if (isNaN(hodnotaRad) || isNaN(hodnotaSlo)) {
-		alert("počitam jenom s čísly")
-
-    throw "Chyba: narazil jsem na NaN!"
-  }
-  
-  return [hodnotaRad, hodnotaSlo];
 }
